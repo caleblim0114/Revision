@@ -1,0 +1,91 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<head>
+    <style>
+        .my-form {
+            height: 500px;
+            width: 300px;
+            background-color: grey;
+            border-radius: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="my-form" style="padding: 0px 0px 0px 50px">
+        <br />
+        <br />
+        <input type="text" id="name" placeholder="name" name="Details"/>
+        <br />
+        <br />
+        <input type="text" id="phoneNumber" placeholder="phone number" name="Details" />
+        <br />
+        <br />
+        <input type="text" id="email" placeholder="email" name="Details" />
+        <br />
+        <br />
+        <input type="radio" id="butter" name="selectedCookie" value="Butter">
+        <label for="butter">Butter</label><br>
+        <input type="radio" id="chocolate" name="selectedCookie" value="Chocolate">
+        <label for="chocolate">Chocolate</label><br>
+        <input type="radio" id="peanut" name="selectedCookie" value="Peanut">
+        <label for="peanut">Peanut</label><br>
+        <br />
+        <input type="radio" id="cod" name="selectedPayment" value="COD">
+        <label for="cod">COD</label><br>
+        <input type="radio" id="onlineBankin" name="selectedPayment" value="Online Bankin">
+        <label for="onlineBankin">Online Bankin</label><br>
+        <br />
+        <button onclick="myFunction()" style="height: 50px; width: 100px">Submit</button>
+        <p id="demo">-</p>
+    </div>
+
+    @section Scripts{
+        <script>
+            function myFunction(){
+                var details = document.getElementsByName("Details");
+                var cookies = document.getElementsByName("selectedCookie");
+                var payments = document.getElementsByName("selectedPayment");
+
+                var cookie = "";
+                var payment = "";
+                var price = "";
+
+                for (i=0; i<cookies.length; i++){
+                    if(cookies[i].checked){
+                        cookie = cookies[i].value;
+                    }
+                }
+
+                for (i = 0; i < payments.length; i++) {
+                    if (payments[i].checked) {
+                        payment = payments[i].value;
+                    }
+                }
+
+                let text = "Please check!\n" + "Name: " + details[0].value + "\n" + "Phone: " + details[1].value + "\n" + "Email: " + details[2].value + "\n" + "Cookie: " + cookie + "\n" + "Payment: " + payment + "\n";
+
+                if (confirm(text)==true){
+                    document.getElementById("name").value = "";
+                    document.getElementById("phoneNumber").value = "";
+                    document.getElementById("email").value = "";
+                    document.getElementById("butter").checked = false;
+                    document.getElementById("chocolate").checked = false;
+                    document.getElementById("peanut").checked = false;
+                    document.getElementById("cod").checked = false;
+                    document.getElementById("onlineBankin").checked = false;
+                    text = "We will send you an email soon. Thank you!";
+                } else {
+                    text = "Cancelled";
+                }
+
+                document.getElementById("demo").innerHTML = text;
+            }
+        </script>
+    }
+</body>
+
